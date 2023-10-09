@@ -1,0 +1,63 @@
+/* Defina uma fonte apropriada para o texto */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para o cabeçalho */
+h1 {
+    background-color: #e62117; /* Vermelho de Pokémon */
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Estilo para a lista de Pokémon */
+#pokemon-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#pokemon-list li {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+}
+
+/* Estilo para os links dos Pokémon na lista */
+#pokemon-list a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Estilo para os detalhes do Pokémon */
+#pokemon-details {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilo para links de volta */
+#pokemon-details a {
+    color: #e62117;
+    text-decoration: underline;
+}
+
+/* Estilo para imagens dos Pokémon */
+.pokemon-image {
+    max-width: 100px;
+    max-height: 100px;
+    margin: 0 auto;
+    display: block;
+}
