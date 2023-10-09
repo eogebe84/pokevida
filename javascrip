@@ -1,0 +1,164 @@
+// Dados dos Pokémon iniciais
+let initialPokemonData = [
+  { id: 1, name: "nat", type: "Grass/arroz", imageURL: "https://scontent.fudi1-1.fna.fbcdn.net/v/t1.6435-9/207803618_2152700821538904_3048510452565798779_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NMZgIvUIaUkAX893YwK&_nc_ht=scontent.fudi1-1.fna&oh=00_AfCS9MD8EsVfAolE1xgq76o5ZbfxIr_S7UdSDvIEwxwksA&oe=6547C68D" },
+  { id: 2, name: "GEBE", type: "Fire", imageURL: "https://scontent.fudi1-1.fna.fbcdn.net/v/t39.30808-6/275925097_1411405092644730_686169073978804194_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=1b51e3&_nc_ohc=pdsyrXgzBuQAX9pOQFB&_nc_ht=scontent.fudi1-1.fna&oh=00_AfDon0jKR6TZ0ToN-NNWSBxgvZAoORnmCKvhE-v5HHsdUQ&oe=65254413" },
+  { id: 3, name: "peter", type: "plastico/aluminion", imageURL: "https://scontent-gru1-1.xx.fbcdn.net/v/t1.6435-9/141281731_1145720605871659_233871321685181631_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=e66fbGG92IUAX8UzBQl&_nc_ht=scontent-gru1-1.xx&oh=00_AfDQnYyxNmbK3WVps5zxncHbH9zATi3ilnRjNnlSev1bCg&oe=654A1C2F" },
+  { id: 4, name: "uila", type: "sono/amor", imageURL: "https://scontent-gru1-1.xx.fbcdn.net/v/t1.18169-9/17191525_1194094027378540_1535118758493911896_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7a1959&_nc_ohc=PKGoQerRj6UAX9MuvCJ&_nc_ht=scontent-gru1-1.xx&oh=00_AfDLDVBnqQuEEOgHjkbNXWQR5tWUKXliXhWj0qiAsWzQag&oe=654A3A6C" },
+];
+
+// Dados dos Pokémon excluídos temporariamente
+let deletedPokemonData = [];
+
+// Função para carregar os dados dos Pokémon do armazenamento local
+function loadPokemonData() {
+  const savedPokemonData = localStorage.getItem("pokemonData");
+  if (savedPokemonData) {
+    initialPokemonData = JSON.parse(savedPokemonData);
+  }
+}
+
+// Função para salvar os dados dos Pokémon no armazenamento local
+function savePokemonData(data) {
+  localStorage.setItem("pokemonData", JSON.stringify(data));
+}
+
+// Função para redefinir a Pokédex para o estado inicial
+function resetPokedex() {
+  initialPokemonData = [
+    { id: 1, name: "nat", type: "Grass/arroz", imageURL: "https://scontent.fudi1-1.fna.fbcdn.net/v/t1.6435-9/207803618_2152700821538904_3048510452565798779_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NMZgIvUIaUkAX893YwK&_nc_ht=scontent.fudi1-1.fna&oh=00_AfCS9MD8EsVfAolE1xgq76o5ZbfxIr_S7UdSDvIEwxwksA&oe=6547C68D" },
+    { id: 2, name: "GEBE", type: "Fire", imageURL: "https://scontent.fudi1-1.fna.fbcdn.net/v/t39.30808-6/275925097_1411405092644730_686169073978804194_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=1b51e3&_nc_ohc=pdsyrXgzBuQAX9pOQFB&_nc_ht=scontent.fudi1-1.fna&oh=00_AfDon0jKR6TZ0ToN-NNWSBxgvZAoORnmCKvhE-v5HHsdUQ&oe=65254413" },
+    { id: 3, name: "peter", type: "plastico/aluminion", imageURL: "https://scontent-gru1-1.xx.fbcdn.net/v/t1.6435-9/141281731_1145720605871659_233871321685181631_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7a1959&_nc_ohc=e66fbGG92IUAX8UzBQl&_nc_ht=scontent-gru1-1.xx&oh=00_AfDQnYyxNmbK3WVps5zxncHbH9zATi3ilnRjNnlSev1bCg&oe=654A1C2F" },
+    { id: 4, name: "uila", type: "sono/amor", imageURL: "https://scontent-gru1-1.xx.fbcdn.net/v/t1.18169-9/17191525_1194094027378540_1535118758493911896_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7a1959&_nc_ohc=PKGoQerRj6UAX9MuvCJ&_nc_ht=scontent-gru1-1.xx&oh=00_AfDLDVBnqQuEEOgHjkbNXWQR5tWUKXliXhWj0qiAsWzQag&oe=654A3A6C" },
+  ];
+  deletedPokemonData = [];
+
+
+  // Salvar os dados redefinidos no armazenamento local
+  savePokemonData(initialPokemonData);
+  saveDeletedPokemonData(deletedPokemonData);
+
+  // Atualizar a exibição
+  displayPokemonList();
+}
+
+// Função para salvar os dados dos Pokémon excluídos temporariamente no armazenamento local
+function saveDeletedPokemonData(data) {
+  localStorage.setItem("deletedPokemonData", JSON.stringify(data));
+}
+
+// Carregar dados dos Pokémon excluídos temporariamente
+function loadDeletedPokemonData() {
+  const savedDeletedPokemonData = localStorage.getItem("deletedPokemonData");
+  if (savedDeletedPokemonData) {
+    deletedPokemonData = JSON.parse(savedDeletedPokemonData);
+  }
+}
+
+// Carregar dados dos Pokémon excluídos temporariamente
+loadDeletedPokemonData();
+
+// Função para exibir a lista de Pokémon
+function displayPokemonList() {
+  const pokemonList = document.getElementById("pokemon-list");
+
+  pokemonList.innerHTML = ""; // Limpe o conteúdo atual
+
+  initialPokemonData.forEach(pokemon => {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `
+      <a href="#" data-id="${pokemon.id}">${pokemon.name}</a>
+      <button class="delete-button" data-id="${pokemon.id}">Excluir</button>
+    `;
+    listItem.addEventListener("click", showPokemonDetails);
+    pokemonList.appendChild(listItem);
+
+    // Adicionar evento de exclusão
+    const deleteButton = listItem.querySelector(".delete-button");
+    deleteButton.addEventListener("click", deletePokemon);
+  });
+
+  // Adicionar botão de desfazer exclusão
+  if (deletedPokemonData.length > 0) {
+    const undoButton = document.createElement("button");
+    undoButton.textContent = "Desfazer";
+    undoButton.addEventListener("click", undoDelete);
+    pokemonList.appendChild(undoButton);
+  }
+}
+
+// Função para exibir os detalhes de um Pokémon
+function showPokemonDetails(event) {
+  event.preventDefault();
+  const pokemonId = event.target.getAttribute("data-id");
+  const selectedPokemon = initialPokemonData.find(pokemon => pokemon.id == pokemonId);
+  const detailsContainer = document.getElementById("pokemon-details");
+
+  detailsContainer.innerHTML = `
+    <h2>${selectedPokemon.name}</h2>
+    <img src="${selectedPokemon.imageURL}" alt="${selectedPokemon.name}" class="pokemon-image">
+    <p>Type: ${selectedPokemon.type}</p>
+    <!-- Adicione mais informações do Pokémon aqui -->
+  `;
+}
+
+// Função para excluir um Pokémon
+function deletePokemon(event) {
+  event.stopPropagation(); // Evitar que o evento de clique no Pokémon seja acionado
+  const pokemonId = event.target.getAttribute("data-id");
+  const deletedPokemon = initialPokemonData.find(pokemon => pokemon.id == pokemonId);
+
+  if (deletedPokemon) {
+    // Adicionar o Pokémon excluído temporariamente à lista de excluídos
+    deletedPokemonData.push(deletedPokemon);
+
+    // Remover o Pokémon da lista inicial
+    initialPokemonData = initialPokemonData.filter(pokemon => pokemon.id != pokemonId);
+
+    // Atualizar a exibição
+    displayPokemonList();
+  }
+}
+
+// Função para desfazer a exclusão de um Pokémon
+function undoDelete() {
+  if (deletedPokemonData.length > 0) {
+    const lastDeletedPokemon = deletedPokemonData.pop();
+    initialPokemonData.push(lastDeletedPokemon);
+
+    // Atualizar a exibição
+    displayPokemonList();
+  }
+}
+
+// Chamada inicial para exibir a lista de Pokémon
+displayPokemonList();
+
+// Manipulador de evento para adicionar um novo Pokémon
+document.getElementById("pokemon-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const type = document.getElementById("type").value;
+  const imageURL = document.getElementById("imageURL").value;
+
+  if (name && type && imageURL) {
+    const newPokemon = {
+      id: initialPokemonData.length + 1,
+      name: name,
+      type: type,
+      imageURL: imageURL
+    };
+
+    initialPokemonData.push(newPokemon);
+    savePokemonData(initialPokemonData); // Salvar os dados no armazenamento local
+    displayPokemonList();
+
+    // Limpar campos do formulário após adicionar
+    document.getElementById("name").value = "";
+    document.getElementById("type").value = "";
+    document.getElementById("imageURL").value = "";
+  }
+});
+
+// Manipulador de evento para o botão "Redefinir Pokédex"
+document.getElementById("reset-button").addEventListener("click", resetPokedex);
